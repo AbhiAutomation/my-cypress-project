@@ -8,7 +8,7 @@ pipeline {
         stage('Cypress Parallel Tests Suite') {
             parallel {
                 stage('Slave Node1') {
-                    agent { label 'remote_node1' }
+                    agent { label 'remote_1' }
                     steps {
                         git url: 'https://github.com/AbhiAutomation/my-cypress-project.git'
                         bat 'npm install'
@@ -18,7 +18,7 @@ pipeline {
                 }
 
                 stage('Slave Node2') {
-                    agent { label 'remote_node2' }
+                    agent { label 'remote_2' }
                     steps {
                         git url: 'https://github.com/AbhiAutomation/my-cypress-project.git'
                         bat 'npm install'
