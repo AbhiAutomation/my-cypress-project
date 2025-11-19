@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^23.2.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.10.1",
+    "cypress": "^15.6.0",
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "mochawesome": "^7.1.4",
+    "typescript": "^5.9.3"
+  },
+  "name": "my",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run --browser chrome --headed",
+    "recordDashboard": "npx cypress run --record --key b409d281-2629-40a5-aa8b-8938875185b9"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": ""
+}

@@ -1,0 +1,4 @@
+Project id :jfzmoc
+Record Key : b409d281-2629-40a5-aa8b-8938875185b9
+
+npx cypress run --record --key b409d281-2629-40a5-aa8b-8938875185b9
