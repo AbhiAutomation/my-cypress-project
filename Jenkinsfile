@@ -1,32 +1,35 @@
 pipeline {
-    agent any 
-    tools {
-        nodejs 'node'
-    }
-
-    stages {
-        stage('Cypress Parallel Tests Suite') {
-            parallel {
-                stage('Slave Node1') {
-                    agent { label 'remote_1' }
-                    steps {
-                        git url: 'https://github.com/AbhiAutomation/my-cypress-project.git'
-                        bat 'npm install'
-                        bat 'npm update'
-                        bat 'npm run recordDashboard'
-                    }
-                }
-
-                stage('Slave Node2') {
-                    agent { label 'remote_2' }
-                    steps {
-                        git url: 'https://github.com/AbhiAutomation/my-cypress-project.git'
-                        bat 'npm install'
-                        bat 'npm update'
-                        bat 'npm run recordDashboard'
-                    }
-                }
+  agent any
+  stages {
+    stage('Parallel') {
+      parallel {
+        stage('Slave Node1') {
+          agent { label 'remote_1' }
+          steps {
+            ws("${WORKSPACE}_remote1") {
+              checkout([$class: 'GitSCM',
+                branches: [[name: 'refs/heads/main']],
+                userRemoteConfigs: [[url: 'https://github.com/AbhiAutomation/my-cypress-project.git']]
+              ])
+              sh 'npm ci'
+              sh 'npm test'
             }
+          }
         }
+        stage('Slave Node2') {
+          agent { label 'remote_2' }
+          steps {
+            ws("${WORKSPACE}_remote2") {
+              checkout([$class: 'GitSCM',
+                branches: [[name: 'refs/heads/main']],
+                userRemoteConfigs: [[url: 'https://github.com/AbhiAutomation/my-cypress-project.git']]
+              ])
+              sh 'npm ci'
+              sh 'npm test'
+            }
+          }
+        }
+      }
     }
+  }
 }
