@@ -1,9 +1,10 @@
 pipeline {
-   agent { docker { image 'node:24' } }
-  
+    agent any 
+    tools {
+        nodejs 'node'
+    }
+
     stages {
-        stage('Install') { steps { sh 'node --version; npm ci' } }
-  }
         stage('Cypress Parallel Tests Suite') {
             parallel {
                 stage('Slave Node1') {
