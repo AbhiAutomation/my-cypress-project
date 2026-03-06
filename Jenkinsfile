@@ -10,7 +10,7 @@ pipeline {
                 stage('Slave Node1') {
                     agent { label 'remote_1' }
                     steps {
-                        git url: 'https://github.com/AbhiAutomation/my-cypress-project.git'
+                        git branch: 'main', url: 'https://github.com/AbhiAutomation/my-cypress-project.git'
                         bat 'npm install'
                         bat 'npm update'
                         bat 'npm run recordDashboard'
@@ -20,7 +20,7 @@ pipeline {
                 stage('Slave Node2') {
                     agent { label 'remote_2' }
                     steps {
-                        git url: 'https://github.com/AbhiAutomation/my-cypress-project.git'
+                        git branch: 'main', url: 'https://github.com/AbhiAutomation/my-cypress-project.git'
                         bat 'npm install'
                         bat 'npm update'
                         bat 'npm run recordDashboard'
